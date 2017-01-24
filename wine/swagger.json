@@ -1,6 +1,6 @@
 {
     "swagger": "2.0",
-    "host": "http://wine.mshanken.io/",
+    "host": "wine.mshanken.io",
     "info": {
         "version": "1.0.0",
         "title": "Wine Service"

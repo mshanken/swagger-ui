@@ -4,7 +4,7 @@
         "version": "1.0.0",
         "title": "User Authentication Service"
     },
-    "host": "https://auth.mshanken.io/",
+    "host": "auth.mshanken.io",
     "paths": {
         "/oauth/token": {
             "post": {
