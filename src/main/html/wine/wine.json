@@ -1,0 +1,457 @@
+{
+    "swagger": "2.0",
+    "host": "wine.mshanken.io",
+    "info": {
+        "version": "1.0.0",
+        "title": "Wine Service"
+    },
+    "paths": {
+        "/wine_vintages/search": {
+            "get": {
+                "description": "Gets `WineSearchResult` objects.  \nRetrieves basic list of wines that match search criteria\n",
+                "security": [
+                    {
+                        "UserService": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Field to sort results by, followed by either asc or desc",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "publication_date_ds asc",
+                            "publication_date_ds desc",
+                            "winery_name_ss asc",
+                            "winery_name_ss desc",
+                            "wine_name_ss asc",
+                            "wine_name_ss desc",
+                            "score_is asc",
+                            "score_is desc",
+                            "price_fs asc",
+                            "price_fs desc",
+                            "color_s asc",
+                            "color_s desc",
+                            "region_ss asc",
+                            "region_ss desc"
+                        ]
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Arbitrary search string to use for query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "How many wines to return per page",
+                        "required": false,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of WineSearchResults",
+                        "schema": {
+                            "$ref": "#/definitions/WineVintageSearchResults"
+                        }
+                    }
+                }
+            }
+        },
+        "/wine_vintages/{id}": {
+            "get": {
+                "description": "Gets `WineVintageItem` objects.\nRetrieves the full data view for a particular WineVintage ID\n",
+                "security": [
+                    {
+                        "UserService": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of wine to fetch",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A detail view of a WineVintage item",
+                        "schema": {
+                            "$ref": "#/definitions/WineVintageDetailItem"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "UserService": {
+            "type": "apiKey",
+            "name": "session-token",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "WineVintageSearchResults": {
+            "type": "object",
+            "description": "Single object that wraps all WineSearch results",
+            "required": [
+                "results"
+            ],
+            "properties": {
+                "results": {
+                    "$ref": "#/definitions/WineVintageSearchResultsArray"
+                },
+                "facets": {
+                    "$ref": "#/definitions/WineVintageSearchFacetsArray"
+                },
+                "summary": {
+                    "$ref": "#/definitions/WineVintageSearchSummaryArray"
+                }
+            }
+        },
+        "WineVintageSearchFacetsArray": {
+            "type": "object",
+            "description": "Array of WineSearchFacet Items",
+            "properties": {
+                "winery": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                },
+                "grape": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                },
+                "region": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                },
+                "type": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                },
+                "color": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                },
+                "score": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                },
+                "price": {
+                    "$ref": "#/definitions/WineVintageSearchFacetItem"
+                }
+            }
+        },
+        "WineVintageSearchSummaryArray": {
+            "type": "object",
+            "description": "Summary returned with each search",
+            "properties": {
+                "count": {
+                    "type": "number"
+                },
+                "total_pages": {
+                    "type": "number"
+                },
+                "current_page": {
+                    "type": "number"
+                },
+                "next_page": {
+                    "type": "number"
+                },
+                "sort": {
+                    "type": "object",
+                    "properties": {
+                        "score_asc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by score asc"
+                        },
+                        "score_desc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by score desc"
+                        },
+                        "price_asc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by price asc"
+                        },
+                        "price_desc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by price desc"
+                        },
+                        "wine_asc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by wine asc"
+                        },
+                        "wine_desc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by wine desc"
+                        },
+                        "vintage_asc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by vintage asc"
+                        },
+                        "vintage_desc": {
+                            "type": "string",
+                            "description": "Criteria to pass in order to do a sort by vintage desc"
+                        }
+                    }
+                }
+            }
+        },
+        "WineVintageSearchFacetItem": {
+            "type": "object",
+            "description": "Single object containing all fields returned with each facet",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "column": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "number"
+                },
+                "criterion": {
+                    "type": "string"
+                }
+            }
+        },
+        "WineVintageSearchResultsArray": {
+            "type": "array",
+            "description": "Array of WineSearchResult Items",
+            "items": {
+                "$ref": "#/definitions/WineVintageSearchResultsItem"
+            }
+        },
+        "WineVintageSearchResultsItem": {
+            "type": "object",
+            "description": "Single object containing all fields returned by a WineVintage search",
+            "required": [
+                "wine_vintage_id",
+                "bottle_id",
+                "wine_name",
+                "winery_name",
+                "price",
+                "score",
+                "vintage",
+                "non_vintage"
+            ],
+            "properties": {
+                "wine_vintage_id": {
+                    "type": "integer",
+                    "description": "Unique identifier for combination of a wine and vintage"
+                },
+                "bottle_id": {
+                    "type": "integer",
+                    "description": "Unique identifier for combination of wine, vintage, and rating"
+                },
+                "wine_name": {
+                    "type": "string",
+                    "description": "Display name of the wine"
+                },
+                "winery_name": {
+                    "type": "string",
+                    "description": "Display name of the winery"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "Release price for this bottle_id at time of rating"
+                },
+                "score": {
+                    "type": "number",
+                    "description": "Spectator score for this bottle_id"
+                },
+                "vintage": {
+                    "type": "string",
+                    "description": "Vintage for this wine_vintage_id"
+                },
+                "non_vintage": {
+                    "type": "boolean",
+                    "description": "Is this a NV wine?  (Mostly for sparkling/Champagne)"
+                },
+                "accolades": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "WineVintageDetailItem": {
+            "type": "object",
+            "description": "Detailed object containing all data for a particular WineVintage item",
+            "required": [
+                "accolades",
+                "tasting_notes"
+            ],
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Unique ID for this WineVintage item"
+                },
+                "winery_name": {
+                    "type": "string",
+                    "description": "Winery's full name"
+                },
+                "wine_name": {
+                    "type": "string",
+                    "description": "Wine's full name"
+                },
+                "vintage": {
+                    "type": "number",
+                    "description": "What is the vintage of this wine?"
+                },
+                "color": {
+                    "type": "string",
+                    "description": "What is the color of this wine?",
+                    "enum": [
+                        "red",
+                        "white",
+                        "blush"
+                    ]
+                },
+                "wine_type": {
+                    "type": "string",
+                    "description": "Is this wine still or sparkling?",
+                    "enum": [
+                        "still",
+                        "sparkling"
+                    ]
+                },
+                "region_trail": {
+                    "type": "string",
+                    "description": "Full hierarchy of this wine's region, from broadest to most narrow"
+                },
+                "non_vintage": {
+                    "type": "boolean",
+                    "description": "Is this an non-vintage wine?"
+                },
+                "release_price": {
+                    "type": "object",
+                    "description": "Price at release",
+                    "properties": {
+                        "price": {
+                            "type": "number",
+                            "description": "Release price in dollars"
+                        },
+                        "bottle_size": {
+                            "type": "string",
+                            "description": "Bottle size code for this release price"
+                        }
+                    }
+                },
+                "grapes": {
+                    "type": "array",
+                    "description": "What grape or grapes is this wine made from?",
+                    "items": {
+                        "$ref": "#/definitions/WineVintageDetailGrapeItem"
+                    }
+                },
+                "auction_price": {
+                    "type": "object",
+                    "description": "Current auction data",
+                    "properties": {
+                        "price": {
+                            "type": "number",
+                            "description": "Current price in dollars"
+                        },
+                        "bottle_size": {
+                            "type": "string",
+                            "description": "Bottle size code for this auction price"
+                        }
+                    }
+                },
+                "accolades": {
+                    "type": "array",
+                    "description": "Array of all accolades given",
+                    "items": {
+                        "$ref": "#/definitions/WineVintageDetailAccoladeItem"
+                    }
+                },
+                "tasting_notes": {
+                    "type": "array",
+                    "description": "Array of all tasting notes",
+                    "items": {
+                        "$ref": "#/definitions/WineVintageDetailTastingNoteItem"
+                    }
+                }
+            }
+        },
+        "WineVintageDetailGrapeItem": {
+            "type": "object",
+            "description": "All fields returned in grape array",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "unique ID for this grape"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of this grape"
+                }
+            }
+        },
+        "WineVintageDetailAccoladeItem": {
+            "type": "object",
+            "description": "All fields returned in accolades array",
+            "required": [
+                "name",
+                "issue_date",
+                "year"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "What is this accolade's name?"
+                },
+                "issue_date": {
+                    "type": "string",
+                    "description": "In what issue was this accolade given?"
+                },
+                "year": {
+                    "type": "string",
+                    "description": "To what year does this accolade belong?"
+                }
+            }
+        },
+        "WineVintageDetailTastingNoteItem": {
+            "type": "object",
+            "description": "All fields returned in tasting note",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Unique ID for this tasting note"
+                },
+                "note": {
+                    "type": "string",
+                    "description": "Full text of tasting note"
+                },
+                "tasting_type": {
+                    "type": "string",
+                    "description": "Blind tasting or non-blind or barrel?"
+                },
+                "score": {
+                    "type": "number",
+                    "description": "Spectator score given during this tasting"
+                },
+                "taster": {
+                    "type": "string",
+                    "description": "Initials of the taster who reviewed this wine"
+                },
+                "publication_date": {
+                    "type": "string",
+                    "description": "Publication date of this tasting"
+                },
+                "issue_date": {
+                    "type": "string",
+                    "description": "Issue that this tasting belongs to"
+                }
+            }
+        }
+    }
+}
