@@ -20,6 +20,3 @@ phases:
       - echo Copying build over to s3
       - s3cmd --version
       - s3cmd --access_key=$ACCESS_KEY --secret_key=$SECRET_KEY sync --guess-mime-type --acl-public ./dist/* s3://adbvqwekuh231478078/build-s3sync/
-artifacts:
-    files:
-      - dist/**/*
