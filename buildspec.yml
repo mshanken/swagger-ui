@@ -18,5 +18,4 @@ phases:
       - echo Build completed on `date`
   artifacts:
     files:
-      - dist/build
-    discard-paths: yes
+      - dist/index.html
