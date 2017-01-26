@@ -17,7 +17,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Copying build over to s3
-      - s3cmd sync --access_key= $ACCESS_KEY --secret_key= $SECRET_KEY --acl-public ./dist/* s3://adbvqwekuh231478078/build-s3sync/
+      - s3cmd sync --verbose --access_key=$ACCESS_KEY --secret_key=$SECRET_KEY --acl-public ./dist/* s3://adbvqwekuh231478078/build-s3sync/
 artifacts:
     files:
       - dist/**/*
