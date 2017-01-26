@@ -1,0 +1,18 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - echo Setting up for a build.
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm install          
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+  artifacts:
+    files:
+      - dist/build
+    discard-paths: yes
