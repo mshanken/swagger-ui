@@ -1,6 +1,9 @@
 version: 0.1
 
 phases:
+  install:
+    commands:
+      - apt-get install s3cmd
   pre_build:
     commands:
       - echo Setting up for a build.
