@@ -3,6 +3,8 @@ version: 0.1
 phases:
   install:
     commands:
+      - apt-get update
+      - apt-get install -y python-setuptools s3cmd
   pre_build:
     commands:
       - echo Setting up for a build.
@@ -14,6 +16,8 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Copying build over to s3
+      - echo This is where the s3 sync command goes
 artifacts:
     files:
       - dist/**/*
