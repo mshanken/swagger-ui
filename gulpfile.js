@@ -17,7 +17,7 @@ var runSequence = require('run-sequence');
 var cssnano = require('gulp-cssnano');
 var pkg = require('./package.json');
 var sourcemaps = require('gulp-sourcemaps');
-
+var template = require('gulp-md-template');
 
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
@@ -119,6 +119,7 @@ function _copy() {
   // copy all files inside html folder
   gulp
     .src(['./src/main/html/**/*'])
+    .pipe(template('./src/main/partials'))
     .pipe(gulp.dest('./dist'))
     .on('error', log);
 }
@@ -156,6 +157,7 @@ gulp.task('watch', ['copy-local-specs'], function() {
   return watch([
     './src/**/*.{js,less,handlebars}',
     './src/main/html/*.html',
+    './src/main/partials/*.md',
     './test/specs/**/*.{json,yaml}'
     ],
     function() {

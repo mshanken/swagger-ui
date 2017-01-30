@@ -1,3 +1,14 @@
+# M.Shanken Specific Info
+This repo is pretty much a direct fork of the main swagger-ui repo, but there are a few key differences. 
+
+1. The /dist directory is now in .gitignore
+2. The /src/main/html directory is restructured to handle multiple services
+3. The /src/main/partials directory has been added to house makrdown files that are inserted into html templates.
+
+Other than that it's pretty much the same as the swagger-ui main repo - and the master branch in this repo will try to stay current with that.
+
+
+
 # Swagger UI
 
 [![Build Status](https://travis-ci.org/swagger-api/swagger-ui.svg?branch=master)](https://travis-ci.org/swagger-api/swagger-ui)

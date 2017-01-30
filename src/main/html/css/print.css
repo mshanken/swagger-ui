@@ -258,9 +258,12 @@
   font-size: 0.9em;
   color: #333333;
 }
-.swagger-section .swagger-ui-wrap ol,
+.swagger-section .swagger-ui-wrap ol {
+  list-style-type: decimal;
+  line-height: 20px;
+}
 .swagger-section .swagger-ui-wrap ul {
-  list-style: none;
+  list-style-type: none;
 }
 .swagger-section .swagger-ui-wrap h1 a,
 .swagger-section .swagger-ui-wrap h2 a,

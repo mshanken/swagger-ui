@@ -3,7 +3,8 @@
     "host": "wine.mshanken.io",
     "info": {
         "version": "1.0.0",
-        "title": "Wine Service"
+        "title": "Wine Service",
+        "description": "In order to make requests against the Wine Service you must ALREADY have a session token. If you don't, please go to the User Authentication Service and get one. If you do have a session token then click the \"Authorize\" button above and enter the token in the value field (api_key)."
     },
     "paths": {
         "/wine_vintages/search": {
