@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
-    "host": "wine.mshanken.io",
+    "host": "beta-managewine.winespectator.com",
     "schemes": [
-        "https"
+        "http"
     ],
     "info": {
         "version": "1.0.0",
