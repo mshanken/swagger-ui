@@ -1,10 +1,17 @@
 {
     "swagger": "2.0",
     "host": "wine.mshanken.io",
+    "schemes": [
+        "https"
+    ],
     "info": {
         "version": "1.0.0",
         "title": "Wine Service",
-        "description": "In order to make requests against the Wine Service you must ALREADY have a session token. If you don't, please go to the User Authentication Service and get one. If you do have a session token then click the \"Authorize\" button above and enter the token in the value field (api_key)."
+        "description": "In order to make requests against the Wine Service you must ALREADY have a session token. If you don't, please go to the User Authentication Service and get one. If you do have a session token then click the \"Authorize\" button above and enter the token in the value field (api_key).",
+        "contact": {
+            "name": "API Support",
+            "email": "apihelp@mshanken.com"
+        }
     },
     "paths": {
         "/wine_vintages/search": {
