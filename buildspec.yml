@@ -17,4 +17,4 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - aws s3 sync ./dist/* s3://docs.mshanken.io/
+      - aws s3 sync ./dist s3://docs.mshanken.io/ --acl public-read
