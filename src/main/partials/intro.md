@@ -1,4 +1,4 @@
-# Welcome to the M.Shanken Service Documentation
+# Welcome to the M. Shanken Service Documentation
 
 You will need a username and password in order to use this documentaion. If you do not have a username and password for this documentaion please email a request for credentials to apihelp@mshanken.com.
 
