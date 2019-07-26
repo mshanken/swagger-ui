@@ -5,7 +5,7 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y python-setuptools python-pip python-dev build-essential 
-      - pip install s3cmd
+      - pip3 install awscli
   pre_build:
     commands:
       - echo Setting up for a build.
@@ -17,4 +17,4 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - s3cmd --access_key=$ACCESS_KEY --secret_key=$SECRET_KEY sync --no-mime-magic --acl-public ./dist/* s3://docs.mshanken.io/
+      - aws s3 sync ./dist/* s3://docs.mshanken.io/
