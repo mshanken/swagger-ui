@@ -1,6 +1,6 @@
 # Welcome to the M. Shanken Service Documentation
 
-You will need a username and password in order to use this documentaion. If you do not have a username and password for this documentaion please email a request for credentials to apihelp@mshanken.com.
+You will need a username and password in order to use this documentaion. If you don't have a username and password for this documentaion please email a request for credentials to apihelp@mshanken.com.
 
 If you have your username and password go to the [Auth Service Page](http://docs.mshanken.io/auth) and follow these steps:
   1. Get an access_token via POST to the /oauth/token endpoint
